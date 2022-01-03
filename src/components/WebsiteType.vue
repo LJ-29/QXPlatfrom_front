@@ -1,25 +1,15 @@
 <template>
   <div>
-    <ul class="type_ul" v-if="typesbzk">
-      <li>
-        <span @click="all(typeid)">全部</span>
-      </li>
-      <li
-        v-for="(info, index) in contentNames.length < 8 ? contentNames : contentNames.slice(0, 8)"
-        :key="index"
-        @click="getWebsiteByContentId(info.contentId)"
-      >
-        <span  v-text="info.contentName"></span>
-      </li>
-      <li v-if="contentNames.length>8" @click="websiteUnfoldTakeback(false)">更多</li>
-    </ul>
-    <ul class="type_ul" v-else>
-      <li v-for="(info, index) in contentNames" :key="index" @click="getWebsiteByContentId(info.contentId)">
-        <span v-text="info.contentName"></span>
-      </li>
-      <li @click="websiteUnfoldTakeback(true)">收回</li>
-    </ul>
+    
     <div class="list">
+      <div class="seachone">
+          <el-input placeholder="搜索一下">
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+            ></el-button>
+          </el-input>
+        </div>
       <ul>
         <li v-if="liebiao">
           <svg class="iconfont ic" aria-hidden="true">
@@ -106,6 +96,11 @@ export default {
 </script>
 
 <style>
+.seachone{
+  width: 600px;
+  position: absolute;
+  left: 50px;
+}
 .list {
   width: 1000px;
   height: 50px;
