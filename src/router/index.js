@@ -34,9 +34,6 @@ const routes = [{
                     name: "LiebiaoItem",
                     component: () =>
                         import ("../components/WebsiteLiebiaoItem"),
-                    meta: {
-                        title: "列表"
-                    }
                 }]
             }, {
                 path: "/main/screen/websitetype/shuangliebiao",
@@ -48,9 +45,6 @@ const routes = [{
                     name: "ShuangliebiaoItem",
                     component: () =>
                         import ("../components/WebsiteShuangliebiaoItem"),
-                    meta: {
-                        title: "平铺"
-                    }
                 }]
             }]
         }]

@@ -14,7 +14,7 @@
           <li @click="uploadWindow = true">上传</li>
         </ul>
         <div class="seach">
-          <el-input v-model="baidudata" placeholder="百度一下">
+          <el-input id="baidu" v-model="baidudata" placeholder="百度一下">
             <el-button
               @click="baidu"
               slot="append"
@@ -96,6 +96,7 @@
 <script>
 import { findOneByEmail, uploadWebsite } from "../../api/getData";
 import { getTime } from "../../config/public";
+import $ from 'jquery'
 export default {
   data() {
     return {
@@ -128,6 +129,17 @@ export default {
         this.$message.error("数据出错，请联系管理员");
       });
     }
+  },
+  mounted() {
+    var baiduInput=document.getElementById("baidu")
+    baiduInput.focus()
+    var this_=this
+    //百度一下回车监听事件
+    $(document).keydown(function (event) {
+      if (event.keyCode==13&&this_.baidudata!="") {
+        this_.baidu()
+      }
+    });
   },
   methods: {
     /**
@@ -178,7 +190,6 @@ export default {
     logout() {
       localStorage.setItem("qxplatformUserEmail", {});
       localStorage.setItem("qxplatformIsLogin", false);
-      
     },
     /**
      * 百度一下
