@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="header">
+  <div @mousedown="generateTitle">
+    <div class="header" id="hear">
       <div class="platform_img">
         <img
           src="http://loveqx.top:8321/images/qxplatform/backgroundImage/backgroundimage1.jpg"
@@ -102,6 +102,7 @@ export default {
     return {
       isLogin: false,
       baidudata: "",
+      titleIndex:0,
       userInformation: {},
       uploadWindow: false,
       uploadLoading: false,
@@ -114,6 +115,16 @@ export default {
         state: "1",
         cause: "信息提交，等待审核",
       },
+      titleBackgrand:[
+        {t:"小千禧",b:"#e42c2c"},
+        {t:"超爱你",b:"#68ec4e"},
+        {t:"你是我",b:"#f3f72e"},
+        {t:"小宝贝",b:"#2e64f7"},
+        {t:"共努力",b:"#46daff"},
+        {t:"赚大钱",b:"#f53dd6"},
+        {t:"你拍一",b:"#fa2a57"},
+        {t:"我拍一",b:"#1317ec"}
+      ]
     };
   },
   created() {
@@ -142,6 +153,29 @@ export default {
     });
   },
   methods: {
+    /**
+     * 鼠标点击原地生成文字
+     */
+    generateTitle(event){
+      if(event.button==0){
+        console.log(event);
+        let x=event.pageX
+        let y=event.pageY
+        var date=new Date().getMilliseconds()
+        var tit=$("<span></span>").text("♥"+this.titleBackgrand[this.titleIndex].t+"♥").addClass(""+date).css({"left":x-45,"top":y-30,"position":"absolute","color":this.titleBackgrand[this.titleIndex].b,"z-index":"10"}).animate({
+          top:y-180,
+          opacity:0
+        },1000)
+        this.titleIndex+=1
+        if (this.titleIndex==this.titleBackgrand.length) {
+          this.titleIndex=0
+        }
+        $("#hear").append(tit)
+        setTimeout(()=>{
+          $("."+date).remove()
+        },1000)
+      }
+    },
     /**
      * 未登录时跳转登录界面
      */
